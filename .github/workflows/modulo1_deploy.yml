@@ -41,21 +41,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Hello world 
-        run: echo "$SALIDA"
+        run: echo $SALIDA
 
   third_job:
-    name: tercer job
+    name: Uso de Artefactos
     needs: second_job
     runs-on: ubuntu-latest
     
     steps:
-      - name: working dir
-        run: ls -al
+      - name: Generar archivo
+        run: |
+          echo "Archivo prueba, hola" >> test.log
       
-      - name: Action
-        uses: actions/checkout@v4
-      
-      - name: working dir
-        run: ls -al
-    
-
+      - name: Subir artefacto
+        uses: actions/upload-artifact@v4
+        with:
+          name: archivo-test
+          path: test.log
