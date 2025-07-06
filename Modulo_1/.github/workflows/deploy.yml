@@ -1,0 +1,14 @@
+# Yaml example of module1
+name: Deploy Module 1
+
+on: push
+
+jobs:
+	first_job:
+			runs-on: ubuntu-latest
+    
+    steps:
+			- name: Hello world
+				run: echo "Hello world" 
+    
+
