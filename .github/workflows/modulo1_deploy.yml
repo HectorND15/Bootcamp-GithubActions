@@ -2,15 +2,15 @@
 name: Deploy Module 1
 
 on:
-	push:
-		branches: [ modulo1 ]
+  push:
+    branches: [ modulo1 ]
 
 jobs:
-	first_job:
-			runs-on: ubuntu-latest
+  first_job:
+    runs-on: ubuntu-latest
     
     steps:
-			- name: Hello world
-				run: echo "Hello world" 
+      - name: Hello world
+        run: echo "Hello world" 
     
 
