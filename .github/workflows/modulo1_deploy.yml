@@ -7,11 +7,20 @@ on:
 
 jobs:
   first_job:
-    name: primero job
+    name: primer job
     runs-on: ubuntu-latest
     steps:
-      - name: Hello world
-        run: echo "Hello world" 
+      - name: Revisar Directorio Output
+        id: step_1
+        run: echo $GITHUB_OUTPUT
+
+      - name: Guardar una variable en la salida
+        id: step_2
+        run: echo "my_var=Hola mundo" >> $GITHUB_OUTPUT
+
+        # Para hacer referencia a otro step, deberemos de usar el contexto con su id, el cual deberemos crear previamente. 
+      - name: Obtener Mensaje
+        run: echo "  "
 
   second_job:
     name: segundo job
