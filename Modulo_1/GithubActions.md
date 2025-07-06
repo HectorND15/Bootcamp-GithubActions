@@ -37,3 +37,26 @@ jobs:
 				with:
 					node-version: '18'
 ```
+
+### La directiva `needs`
+
+La directiva `needs` permite definir dependencias entre jobs dentro de un workflow, asegurando que un job no comience hasta que los jobs de los que depende hayan finalizado correctamente.
+
+#### Ejemplo de uso de `needs`
+
+```yaml
+jobs:
+	build:
+		runs-on: ubuntu-latest
+		steps:
+			- name: Checkout repository
+				uses: actions/checkout@v3
+
+	test:
+		runs-on: ubuntu-latest
+		needs: build
+		steps:
+			- name: Ejecutar pruebas
+				run: echo "Ejecutando pruebas después de build"
+```
+En este ejemplo, el job `test` solo se ejecutará después de que el job `build` haya finalizado con éxito.
