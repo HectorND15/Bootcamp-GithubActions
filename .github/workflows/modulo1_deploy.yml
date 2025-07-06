@@ -9,6 +9,11 @@ jobs:
   first_job:
     name: primer job
     runs-on: ubuntu-latest
+
+    # Se puede definir salida para compartir entre jobs
+    outputs:
+      salida: ${{ steps.step_2.outputs.my_var }}
+
     steps:
       - name: Revisar Directorio Output
         id: step_1
@@ -26,10 +31,16 @@ jobs:
     name: segundo job
     if: ${{ github.ref != 'refs/head/main' }}
     needs: first_job
+
+    # Se asignar una variable de entorno para la salida del primer JOB
+    # A este proceso se le conoce como interpolacion.
+    env:
+      SALIDA: $ {{ job.first_job.outputs.salida }}
+
     runs-on: ubuntu-latest
     steps:
-      - name: Hello world
-        run: echo "Hello world"
+      - name: Hello world 
+        run: echo $SALIDA
 
   third_job:
     name: tercer job
