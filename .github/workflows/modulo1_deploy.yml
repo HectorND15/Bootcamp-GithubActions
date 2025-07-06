@@ -41,7 +41,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Hello world 
-        run: echo $SALIDA
+        run: echo "$SALIDA"
 
   third_job:
     name: tercer job
