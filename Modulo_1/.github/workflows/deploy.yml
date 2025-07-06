@@ -1,7 +1,9 @@
 # Yaml example of module1
 name: Deploy Module 1
 
-on: push
+on: 
+	push:
+		branches: [ modulo1 ]
 
 jobs:
 	first_job:
