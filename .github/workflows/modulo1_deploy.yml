@@ -6,46 +6,46 @@ on:
     branches: [ modulo1 ]
 
 jobs:
-  first_job:
-    name: primer job
-    runs-on: ubuntu-latest
+  # first_job:
+  #   name: primer job
+  #   runs-on: ubuntu-latest
 
-    # Se puede definir salida para compartir entre jobs
-    outputs:
-      salida: ${{ steps.step_2.outputs.my_var }}
+  #   # Se puede definir salida para compartir entre jobs
+  #   outputs:
+  #     salida: ${{ steps.step_2.outputs.my_var }}
 
-    steps:
-      - name: Revisar Directorio Output
-        id: step_1
-        run: echo $GITHUB_OUTPUT
+  #   steps:
+  #     - name: Revisar Directorio Output
+  #       id: step_1
+  #       run: echo $GITHUB_OUTPUT
 
-      - name: Guardar una variable en la salida
-        id: step_2
-        run: echo "my_var=Hola mundo" >> $GITHUB_OUTPUT
+  #     - name: Guardar una variable en la salida
+  #       id: step_2
+  #       run: echo "my_var=Hola mundo" >> $GITHUB_OUTPUT
 
-        # Para hacer referencia a otro step, deberemos de usar el contexto con su id, el cual deberemos crear previamente. 
-      - name: Obtener Mensaje
-        run: echo ${{ steps.step_2.outputs.my_var }}
+  #       # Para hacer referencia a otro step, deberemos de usar el contexto con su id, el cual deberemos crear previamente. 
+  #     - name: Obtener Mensaje
+  #       run: echo ${{ steps.step_2.outputs.my_var }}
 
-  second_job:
-    name: segundo job
-    if: ${{ github.ref != 'refs/head/main' }}
-    needs: first_job
+  # second_job:
+  #   name: segundo job
+  #   if: ${{ github.ref != 'refs/head/main' }}
+  #   needs: first_job
 
-    # Se asignar una variable de entorno para la salida del primer JOB
-    # A este proceso se le conoce como interpolacion.
-    # Como este job depende del primero, podemos aprovechar el contexto para compartir informacion.
-    env:
-      SALIDA: ${{ needs.first_job.outputs.salida }}
+  #   # Se asignar una variable de entorno para la salida del primer JOB
+  #   # A este proceso se le conoce como interpolacion.
+  #   # Como este job depende del primero, podemos aprovechar el contexto para compartir informacion.
+  #   env:
+  #     SALIDA: ${{ needs.first_job.outputs.salida }}
 
-    runs-on: ubuntu-latest
-    steps:
-      - name: Hello world 
-        run: echo $SALIDA
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Hello world 
+  #       run: echo $SALIDA
 
   third_job:
     name: Generar Artefacto
-    needs: second_job
+    # needs: second_job
     runs-on: ubuntu-latest
     
     steps:
