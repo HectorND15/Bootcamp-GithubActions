@@ -20,7 +20,7 @@ jobs:
 
         # Para hacer referencia a otro step, deberemos de usar el contexto con su id, el cual deberemos crear previamente. 
       - name: Obtener Mensaje
-        run: echo "  "
+        run: echo ${{ steps.step_2.outputs.my_var }}
 
   second_job:
     name: segundo job
