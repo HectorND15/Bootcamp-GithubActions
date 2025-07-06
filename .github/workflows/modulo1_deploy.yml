@@ -35,7 +35,7 @@ jobs:
     # Se asignar una variable de entorno para la salida del primer JOB
     # A este proceso se le conoce como interpolacion.
     env:
-      SALIDA: $ {{ job.first_job.outputs.salida }}
+      SALIDA: ${{ job.first_job.outputs.salida }}
 
     runs-on: ubuntu-latest
     steps:
